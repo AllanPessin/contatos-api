@@ -19,13 +19,13 @@ server.post('/', function(request, response) {
     const nome = request.body.nome;
     const telefone = request.body.telefone
 
-    contatos = {
+    contato = {
         id: uuid(),
         nome,
         telefone,
     };
 
-    response.push(contatos);
+    contatos.push(contato);
 
     response.status(201).send();
 })
