@@ -19,13 +19,9 @@ server.get('/:id', function(request, response) {
 
 server.post('/', function(request, response) {
     const nome = request.body.nome;
-    const telefone = request.body.telefone
+    const telefone = request.body.telefone;
 
-    var contato = {
-        id: uuid(),
-        nome,
-        telefone,
-    };
+    const result = await database.create(nome, telefone);
 
     contatos.push(contato);
     response.status(201).send();
