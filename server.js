@@ -1,18 +1,19 @@
 const express = require('express');
-const {uuid} = require('uuidv4')
+const database = './database';
 
 const server = express();
 server.use(express.json());
 
 contatos = [];
 
-server.get('/', function(request, response) {
+server.get('/', async function(request, response) {
+    const contatos = await database.read();
     response.json(contatos);
 })
 
 server.get('/:id', function(request, response) {
     const id = request.params.id;
-    const result = contatos.filter(contato => contato.id)
+    const result = contatos.filter(contato => contato.id == id)
     response.json(result);
 })
 
@@ -27,7 +28,6 @@ server.post('/', function(request, response) {
     };
 
     contatos.push(contato);
-
     response.status(201).send();
 })
 
